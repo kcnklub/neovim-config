@@ -39,6 +39,8 @@ end)
 
 lsp.setup()
 
+vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()]]
+
 vim.diagnostic.config({
     virtual_text = true
 })
