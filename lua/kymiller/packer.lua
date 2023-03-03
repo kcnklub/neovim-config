@@ -41,17 +41,30 @@ return require('packer').startup(function(use)
 
 		  -- Snippets
 		  {'L3MON4D3/LuaSnip'},             -- Required
-		  {'rafamadriz/friendly-snippets'}, -- Optional
-	  }
+          {'rafamadriz/friendly-snippets'}, -- Optional
+      }
   }
 
   use({
-	"Pocco81/auto-save.nvim",
-	config = function()
-		 require("auto-save").setup {
-			-- your config goes here
-			-- or just leave it empty :)
-		 }
-	end,
-})
+      "Pocco81/auto-save.nvim",
+      config = function()
+          require("auto-save").setup {
+              -- your config goes here
+              -- or just leave it empty :)
+          }
+      end,
+  })
+
+  use("christoomey/vim-tmux-navigator")
+
+
+  use {
+      'nvim-tree/nvim-tree.lua',
+      requires = {
+          'nvim-tree/nvim-web-devicons', -- optional, for file icons
+      },
+      tag = 'nightly' -- optional, updated every week. (see issue #1193)
+  }
+
+  use("szw/vim-maximizer")
 end)
