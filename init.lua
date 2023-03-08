@@ -1,3 +1,3 @@
-
-require("kymiller.remap")
-require("kymiller.set")
+require("plugins").setup();
+require("remap");
+require("set");
