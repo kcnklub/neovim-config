@@ -1,2 +1,1 @@
-print("starting configuration");
-require("plugins").setup();
+require("plugins")

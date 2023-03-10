@@ -74,6 +74,12 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  ["alpha-nvim"] = {
+    config = { "\27LJ\2\n≈\1\0\0\a\0\t\0\0246\0\0\0006\2\1\0'\3\2\0B\0\3\3\14\0\0\0X\2\4Ä6\2\3\0'\4\4\0B\2\2\1K\0\1\0006\2\0\0006\4\1\0'\5\5\0B\2\3\3\14\0\2\0X\4\4Ä6\4\3\0'\6\6\0B\4\2\1K\0\1\0009\4\a\0019\6\b\3B\4\2\1K\0\1\0\vconfig\nsetup\20theme not found\27alpha.themes.dashboard\20alpha not found\nprint\nalpha\frequire\npcall\0" },
+    loaded = true,
+    path = "/Users/kymiller/.local/share/nvim/site/pack/packer/start/alpha-nvim",
+    url = "https://github.com/goolord/alpha-nvim"
+  },
   everforest = {
     config = { "\27LJ\2\n:\0\0\3\0\3\0\0056\0\0\0009\0\1\0'\2\2\0B\0\2\1K\0\1\0\27colorscheme everforest\bcmd\bvim\0" },
     loaded = true,
@@ -107,6 +113,10 @@ time([[Config for neogit]], false)
 time([[Config for everforest]], true)
 try_loadstring("\27LJ\2\n:\0\0\3\0\3\0\0056\0\0\0009\0\1\0'\2\2\0B\0\2\1K\0\1\0\27colorscheme everforest\bcmd\bvim\0", "config", "everforest")
 time([[Config for everforest]], false)
+-- Config for: alpha-nvim
+time([[Config for alpha-nvim]], true)
+try_loadstring("\27LJ\2\n≈\1\0\0\a\0\t\0\0246\0\0\0006\2\1\0'\3\2\0B\0\3\3\14\0\0\0X\2\4Ä6\2\3\0'\4\4\0B\2\2\1K\0\1\0006\2\0\0006\4\1\0'\5\5\0B\2\3\3\14\0\2\0X\4\4Ä6\4\3\0'\6\6\0B\4\2\1K\0\1\0009\4\a\0019\6\b\3B\4\2\1K\0\1\0\vconfig\nsetup\20theme not found\27alpha.themes.dashboard\20alpha not found\nprint\nalpha\frequire\npcall\0", "config", "alpha-nvim")
+time([[Config for alpha-nvim]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then

@@ -1,61 +1,49 @@
-local M = {}
+-- Plugins
+local function plugins(use)
+	use { "wbthomason/packer.nvim" }
 
-function M.setup()
-  -- Indicate first time installation
-  local packer_bootstrap = false
+	-- Colorscheme
+	use {
+		"sainnhe/everforest",
+		config = function()
+			vim.cmd "colorscheme everforest"
+		end,
+	}
 
-  -- Check if packer.nvim is installed
-  -- Run PackerCompile if there are changes in this file
-  local function packer_init()
-    print("packer_init()");
-    local fn = vim.fn
-    local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
-    if fn.empty(fn.glob(install_path)) > 0 then
-      packer_bootstrap = fn.system {
-        "git",
-        "clone",
-        "--depth",
-        "1",
-        "https://github.com/wbthomason/packer.nvim",
-        install_path,
-      }
-      vim.cmd [[packadd packer.nvim]]
-    end
-    vim.cmd "autocmd BufWritePost plugins.lua source <afile> | PackerCompile"
-  end
+	use {
+		"goolord/alpha-nvim", 
+		config = function()
+			local status_ok, alpha = pcall(require, "alpha");
+			if not status_ok then
+				print("alpha not found");
+				return; 
+			end
 
-  -- Plugins
-  local function plugins(use)
-    use { "wbthomason/packer.nvim" }
+			local theme_ok, theme = pcall(require, "alpha.themes.dashboard"); 
+			if not theme_ok then
+				print("theme not found"); 
+				return; 
+			end
 
-    -- Colorscheme
-    use {
-      "sainnhe/everforest",
-      config = function()
-        vim.cmd "colorscheme everforest"
-      end,
-    }
+			alpha.setup(theme.config);
+		end
+	}
 
-    -- Git
-    use {
-      "TimUntersberger/neogit",
-      requires = "nvim-lua/plenary.nvim",
-      config = function()
-        require("config.neogit").setup()
-      end,
-    }
-
-    if packer_bootstrap then
-      print "Restart Neovim required after installation!"
-      require("packer").sync()
-    end
-  end
-  
-  print("Packer set up")
-  packer_init()
-
-  local packer = require "packer"
-  packer.startup(plugins)
+	-- Git
+	use {
+		"TimUntersberger/neogit",
+		requires = "nvim-lua/plenary.nvim",
+		config = function()
+			require("config.neogit").setup()
+		end,
+	}
 end
 
-return M
+local packer_ok, packer = pcall(require, "packer");
+if not packer_ok then
+	print("Packer not found"); 
+	return; 
+end
+
+packer.init();
+packer.startup(plugins);
