@@ -10,6 +10,18 @@ local function plugins(use)
 		end,
 	}
 
+    use {
+        "catppuccin/nvim",
+        as = "catppuccin",
+        config = function()
+            require("catppuccin").setup({
+                flavour = "mocha",
+                transparent_background = true,
+            })
+            vim.cmd "colorscheme catppuccin"
+        end
+    }
+
 	-- Git
 	use {
 		"TimUntersberger/neogit",
