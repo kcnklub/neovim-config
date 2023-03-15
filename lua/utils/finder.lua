@@ -10,6 +10,16 @@ function M.find_files()
   end
 end
 
+function M.find_git()
+    local builtin = require("telescope.builtin")
+    builtin.git_files();
+end
+
+function M.find_grep()
+    local builtin = require("telescope.builtin")
+    builtin.grep_string({ search = vim.fn.input("grep >> ")})
+end
+
 -- Custom find buffers function.
 function M.find_buffers()
   local results = {}
