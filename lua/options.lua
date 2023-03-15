@@ -31,3 +31,4 @@ vim.opt.clipboard:append("unnamedplus") -- use system clipboard
 
 vim.opt.splitright = true
 vim.opt.splitbelow = true
+

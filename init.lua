@@ -1,3 +1,4 @@
-require("plugins").setup();
+require("utils");
+require("plugins");
 require("remap");
-require("set");
+require("options");
