@@ -16,6 +16,7 @@ require("lazy").setup({
 	spec = {
 		{ import = "plugins" },
 		{ import = "plugins.extras.lang" },
+		{ import = "plugins.extras.ui" },
 	},
 	defaults = { lazy = true, version = nil },
 	install = { missing = true, colorscheme = { "tokyonight", "gruvbox" } },
