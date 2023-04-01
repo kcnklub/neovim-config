@@ -74,31 +74,18 @@ return {
 				},
 				pickers = {
 					find_files = {
-						theme = "dropdown",
 						previewer = false,
-						hidden = true,
 						find_command = { "rg", "--files", "--hidden", "-g", "!.git" },
 					},
-					git_files = {
-						theme = "dropdown",
-						previewer = false,
-					},
-					buffers = {
-						theme = "dropdown",
-						previewer = false,
-					},
+					git_files = {},
+					buffers = {},
 				},
 				extensions = {
 					file_browser = {
-						theme = "dropdown",
-						previewer = false,
 						hijack_netrw = true,
 						mappings = mappings,
 					},
-					project = {
-						hidden_files = false,
-						theme = "dropdown",
-					},
+					project = {},
 				},
 			}
 
