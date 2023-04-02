@@ -1,7 +1,7 @@
 local opt = vim.opt
 
 opt.formatoptions = "jcroqlnt" -- tcqj
-opt.shortmess:append { W = true, I = true, c = true }
+opt.shortmess:append({ W = true, I = true, c = true })
 opt.breakindent = true
 opt.clipboard = "unnamedplus" -- Access system clipboard
 opt.cmdheight = 1
@@ -46,14 +46,24 @@ opt.undofile = true
 opt.updatetime = 200
 opt.wildmode = "longest:full,full"
 
-if vim.fn.has "nvim-0.9.0" == 1 then
-  opt.splitkeep = "screen"
-  opt.shortmess:append { C = true }
+if vim.fn.has("nvim-0.9.0") == 1 then
+	opt.splitkeep = "screen"
+	opt.shortmess:append({ C = true })
 end
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
+local keymap = vim.keymap
+keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 
-vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
+-- window management
+keymap.set("n", "<leader>sv", "<C-w>v")
+keymap.set("n", "<leader>sh", "<C-w>s")
+keymap.set("n", "<leader>se", "<C-w>=")
+keymap.set("n", "<leader>sx", ":close<CR>")
 
-
+-- tab management
+keymap.set("n", "<leader>to", ":tabnew<CR>")
+keymap.set("n", "<leader>tx", ":tabclose<CR>")
+keymap.set("n", "<leader>tn", ":tabn<CR>")
+keymap.set("n", "<leader>tp", ":tabp<CR>")
