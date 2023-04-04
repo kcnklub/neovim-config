@@ -39,6 +39,7 @@ opt.smartindent = true
 opt.splitbelow = true
 opt.splitright = true
 opt.tabstop = 4
+opt.softtabstop = 4
 opt.termguicolors = true
 opt.timeoutlen = 300
 opt.title = true
