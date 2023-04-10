@@ -20,27 +20,27 @@ return {
 			{ "<leader>fo", "<cmd>Telescope frecency theme=dropdown previewer=false<cr>", desc = "Recent" },
 			{ "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
 			{ "<leader>fr", "<cmd>Telescope file_browser<cr>", desc = "Browser" },
-			{ "<leader><space>", "<cmd>Telescope repo list<cr>", desc = "Search" },
-			{ "<leader><space>", "<cmd>Telescope help_tags<cr>", desc = "Search" },
+			{ "<leader>ps", "<cmd>Telescope repo list<cr>", desc = "Search" },
+			{ "<leader>hs", "<cmd>Telescope help_tags<cr>", desc = "Search" },
 			{
-				"<leader><space>",
+				"<leader>pp",
 				function()
 					require("telescope").extensions.project.project({ display_type = "minimal" })
 				end,
 				desc = "List",
 			},
-			{ "<leader><space>", "<cmd>Telescope live_grep<cr>", desc = "Workspace" },
-			{ "<leader><space>", "<cmd>Telescope luasnip<cr>", desc = "Snippets" },
+			{ "<leader>sw", "<cmd>Telescope live_grep<cr>", desc = "Workspace" },
+			{ "<leader>ss", "<cmd>Telescope luasnip<cr>", desc = "Snippets" },
 			{
-				"<leader><space>",
+				"<leader>sb",
 				function()
 					require("telescope.builtin").current_buffer_fuzzy_find()
 				end,
 				desc = "Buffer",
 			},
-			{ "<leader><space>", "<cmd>Telescope aerial<cr>", desc = "Code Outline" },
+			{ "<leader>vo", "<cmd>Telescope aerial<cr>", desc = "Code Outline" },
 			{
-				"<leader><space>",
+				"<leader>zc",
 				function()
 					require("telescope.builtin").colorscheme({ enable_preview = true })
 				end,
