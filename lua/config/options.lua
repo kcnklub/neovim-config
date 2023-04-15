@@ -71,3 +71,5 @@ keymap.set("n", "<leader>tp", ":tabp<CR>")
 
 keymap.set("n", "<C-d>", "<C-d>zz", { remap = true })
 keymap.set("n", "<C-u>", "<C-u>zz", { remap = true })
+
+
