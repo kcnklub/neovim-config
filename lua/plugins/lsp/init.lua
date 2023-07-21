@@ -10,7 +10,6 @@ return {
 					library = { plugins = { "neotest", "nvim-dap-ui" }, types = true },
 				},
 			},
-			{ "j-hui/fidget.nvim", config = true },
 			{ "smjonas/inc-rename.nvim", config = true },
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
@@ -56,13 +55,17 @@ return {
 	},
 	{
 		"williamboman/mason.nvim",
+		build = ":MasonUpdate",
 		cmd = "Mason",
 		keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
 		opts = {
 			ensure_installed = {
 				"stylua",
-				"ruff",
-				"debugpy",
+
+				"jdtls",
+				"java-test",
+
+				"rust-analyzer",
 				"codelldb",
 			},
 		},

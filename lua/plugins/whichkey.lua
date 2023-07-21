@@ -49,21 +49,21 @@ return {
 					},
 					t = { "<cmd>tabclose<cr>", "Close tab" },
 				},
-				b = { name = "+Buffer" },
-				d = { name = "+Debug" },
-				f = { name = "+File" },
-				h = { name = "+Help" },
-				j = { name = "+Jump" },
-				g = { name = "+Git", h = { name = "Hunk" }, t = { name = "Toggle" } },
-				n = { name = "+Notes" },
-				p = { name = "+Project" },
+				b = { name = "Buffer" },
+				d = { name = "Debug" },
+				f = { name = "File" },
+				h = { name = "Help" },
+				j = { name = "Jump" },
+				g = { name = "Git", h = { name = "Hunk" }, t = { name = "Toggle" } },
+				n = { name = "Notes" },
+				p = { name = "Project" },
 
-				t = { name = "+Test", N = { name = "Neotest" }, o = { "Overseer" } },
-				v = { name = "+View" },
-				z = { name = "+System" },
+				t = { name = "Test", N = { name = "Neotest" }, o = { "Overseer" } },
+				v = { name = "View" },
+				z = { name = "System" },
 
 				s = {
-					name = "+Search",
+					name = "Search",
 					c = {
 						function()
 							require("utils.coding").cht()
@@ -78,7 +78,7 @@ return {
 					},
 				},
 				c = {
-					name = "+Code",
+					name = "Code",
 					g = { name = "Annotation" },
 					x = {
 						name = "Swap Next",

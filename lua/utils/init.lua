@@ -13,6 +13,8 @@ function M.quit()
 				vim.cmd("qa!")
 			end
 		end)
+	else
+		vim.cmd("qall")
 	end
 end
 
