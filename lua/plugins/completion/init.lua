@@ -9,6 +9,22 @@ return {
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-cmdline",
 			"petertriho/cmp-git",
+			{
+				"zbirenbaum/copilot-cmp",
+				dependencies = "copilot.lua",
+				opts = {},
+				config = function(_, opts)
+					local copilot_cmp = require("copilot_cmp")
+					copilot_cmp.setup(opts)
+					-- attach cmp source whenever copilot attaches
+					-- fixes lazy-loading issues with the copilot cmp source
+					require("utils.lsp").on_attach(function(client)
+						if client.name == "copilot" then
+							copilot_cmp._on_insert_enter({})
+						end
+					end)
+				end,
+			},
 		},
 		config = function()
 			local cmp = require("cmp")
@@ -96,6 +112,7 @@ return {
 					{ name = "path" },
 					{ name = "git" },
 					{ name = "orgmode" },
+					{ name = "copilot" },
 				}),
 				formatting = {
 					fields = { "kind", "abbr", "menu" },
@@ -167,18 +184,32 @@ return {
 			history = true,
 			delete_check_events = "TextChanged",
 		},
-    -- stylua: ignore
-    keys = {
-      {
-        "<C-j>",
-        function()
-          return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next" or "<C-j>"
-        end,
-        expr = true, remap = true, silent = true, mode = "i",
-      },
-      { "<C-j>", function() require("luasnip").jump(1) end, mode = "s" },
-      { "<C-k>", function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
-    },
+		keys = {
+			{
+				"<C-j>",
+				function()
+					return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next" or "<C-j>"
+				end,
+				expr = true,
+				remap = true,
+				silent = true,
+				mode = "i",
+			},
+			{
+				"<C-j>",
+				function()
+					require("luasnip").jump(1)
+				end,
+				mode = "s",
+			},
+			{
+				"<C-k>",
+				function()
+					require("luasnip").jump(-1)
+				end,
+				mode = { "i", "s" },
+			},
+		},
 		config = function(_, opts)
 			require("luasnip").setup(opts)
 
@@ -188,6 +219,23 @@ return {
 			vim.api.nvim_create_user_command("LuaSnipEdit", function()
 				require("luasnip.loaders.from_lua").edit_snippet_files()
 			end, {})
+		end,
+	},
+
+	{
+		"zbirenbaum/copilot-cmp",
+		dependencies = "copilot.lua",
+		opts = {},
+		config = function(_, opts)
+			local copilot_cmp = require("copilot_cmp")
+			copilot_cmp.setup(opts)
+			-- attach cmp source whenever copilot attaches
+			-- fixes lazy-loading issues with the copilot cmp source
+			require("utils.lsp").on_attach(function(client)
+				if client.name == "copilot" then
+					copilot_cmp._on_insert_enter({})
+				end
+			end)
 		end,
 	},
 }
