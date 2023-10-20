@@ -8,7 +8,6 @@ return {
 			"ahmedkhalf/project.nvim",
 			"cljoly/telescope-repo.nvim",
 			"stevearc/aerial.nvim",
-			"nvim-telescope/telescope-frecency.nvim",
 			"kkharji/sqlite.lua",
 			"aaronhallaert/advanced-git-search.nvim",
 			"benfowler/telescope-luasnip.nvim",
@@ -17,7 +16,6 @@ return {
 		keys = {
 			{ "<leader><space>", require("utils").find_files, desc = "Find files" },
 			{ "<leader>ff", require("utils").find_files, desc = "Find files" },
-			{ "<leader>fo", "<cmd>Telescope frecency theme=dropdown previewer=false<cr>", desc = "Recent" },
 			{ "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
 			{ "<leader>fr", "<cmd>Telescope file_browser<cr>", desc = "Browser" },
 			{ "<leader>ps", "<cmd>Telescope repo list<cr>", desc = "Search" },
@@ -95,7 +93,6 @@ return {
 			telescope.load_extension("project")
 			telescope.load_extension("projects")
 			telescope.load_extension("aerial")
-			telescope.load_extension("frecency")
 			telescope.load_extension("luasnip")
 		end,
 	},
