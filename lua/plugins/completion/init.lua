@@ -9,22 +9,6 @@ return {
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-cmdline",
 			"petertriho/cmp-git",
-			{
-				"zbirenbaum/copilot-cmp",
-				dependencies = "copilot.lua",
-				opts = {},
-				config = function(_, opts)
-					local copilot_cmp = require("copilot_cmp")
-					copilot_cmp.setup(opts)
-					-- attach cmp source whenever copilot attaches
-					-- fixes lazy-loading issues with the copilot cmp source
-					require("utils.lsp").on_attach(function(client)
-						if client.name == "copilot" then
-							copilot_cmp._on_insert_enter({})
-						end
-					end)
-				end,
-			},
 		},
 		config = function()
 			local cmp = require("cmp")
@@ -219,23 +203,6 @@ return {
 			vim.api.nvim_create_user_command("LuaSnipEdit", function()
 				require("luasnip.loaders.from_lua").edit_snippet_files()
 			end, {})
-		end,
-	},
-
-	{
-		"zbirenbaum/copilot-cmp",
-		dependencies = "copilot.lua",
-		opts = {},
-		config = function(_, opts)
-			local copilot_cmp = require("copilot_cmp")
-			copilot_cmp.setup(opts)
-			-- attach cmp source whenever copilot attaches
-			-- fixes lazy-loading issues with the copilot cmp source
-			require("utils.lsp").on_attach(function(client)
-				if client.name == "copilot" then
-					copilot_cmp._on_insert_enter({})
-				end
-			end)
 		end,
 	},
 }

@@ -91,11 +91,7 @@ return {
 			nls.setup({
 				sources = {
 					nls.builtins.formatting.stylua,
-					nls.builtins.formatting.black,
 					nls.builtins.formatting.shfmt,
-					nls.builtins.diagnostics.ruff.with({
-						extra_args = { "--max-line-length=180" },
-					}),
 				},
 			})
 		end,
@@ -129,5 +125,10 @@ return {
 			{ "<leader>cd", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Document Diagnostics" },
 			{ "<leader>cD", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "workspace Diagnostics" },
 		},
+	},
+	{
+		"glepnir/lspsaga.nvim",
+		event = "VeryLazy",
+		config = true,
 	},
 }
