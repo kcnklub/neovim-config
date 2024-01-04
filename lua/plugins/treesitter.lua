@@ -40,6 +40,8 @@ return {
 				"latex",
 				"vim",
 				"yaml",
+				"javascript",
+				"typescript",
 			},
 			highlight = { enable = true, additional_vim_regex_highlighting = { "org", "markdown" } },
 			indent = { enable = true, disable = { "python" } },

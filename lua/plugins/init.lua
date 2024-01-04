@@ -10,8 +10,6 @@ return {
 			})
 		end,
 	},
-	{ "yamatsum/nvim-nonicons", config = true, enabled = false },
-	{ "tpope/vim-repeat", event = "VeryLazy" },
 	{ "nacro90/numb.nvim", event = "BufReadPre", config = true },
 	{
 		"aserowy/tmux.nvim",

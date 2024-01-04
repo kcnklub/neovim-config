@@ -61,10 +61,8 @@ return {
 		opts = {
 			ensure_installed = {
 				"stylua",
-
-				"jdtls",
+				"tsserver",
 				"java-test",
-
 				"rust-analyzer",
 				"codelldb",
 			},
