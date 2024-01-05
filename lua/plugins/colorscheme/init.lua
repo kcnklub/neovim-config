@@ -1,10 +1,9 @@
 return {
 	{
-		"ellisonleao/gruvbox.nvim",
+		"rebelot/kanagawa.nvim",
 		lazy = false,
 		config = function()
-			vim.o.background = "dark"
-			vim.cmd([[colorscheme gruvbox]])
+			vim.cmd([[colorscheme kanagawa]])
 		end,
 	},
 }

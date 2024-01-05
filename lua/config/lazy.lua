@@ -19,7 +19,7 @@ require("lazy").setup({
 		{ import = "plugins.extras.ui" },
 	},
 	defaults = { lazy = true, version = nil },
-	install = { missing = true, colorscheme = { "tokyonight", "gruvbox" } },
+	install = { missing = true, colorscheme = { "kanagawa" } },
 	checker = { enabled = true },
 	performance = {
 		cache = {
