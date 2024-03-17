@@ -19,7 +19,6 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter-textobjects",
-			"JoosepAlviste/nvim-ts-context-commentstring",
 			"RRethy/nvim-treesitter-endwise",
 			"windwp/nvim-ts-autotag",
 		},
@@ -45,7 +44,6 @@ return {
 			},
 			highlight = { enable = true, additional_vim_regex_highlighting = { "org", "markdown" } },
 			indent = { enable = true, disable = { "python" } },
-			context_commentstring = { enable = true },
 			incremental_selection = {
 				enable = true,
 				keymaps = {

@@ -1,7 +1,6 @@
 local install_root_dir = vim.fn.stdpath("data") .. "/mason"
 local extension_path = install_root_dir .. "/packages/codelldb/extension/"
 local codelldb_path = extension_path .. "adapter/codelldb"
-local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
 
 return {
 	{
@@ -59,10 +58,8 @@ return {
 								)
 							end,
 						},
+						dap = {},
 						server = opts,
-						dap = {
-							adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
-						},
 					})
 
 					return true
