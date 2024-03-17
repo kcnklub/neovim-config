@@ -48,8 +48,8 @@ opt.updatetime = 200
 opt.wildmode = "longest:full,full"
 
 if vim.fn.has("nvim-0.9.0") == 1 then
-	opt.splitkeep = "screen"
-	opt.shortmess:append({ C = true })
+    opt.splitkeep = "screen"
+    opt.shortmess:append({ C = true })
 end
 
 vim.g.mapleader = " "
@@ -71,3 +71,11 @@ keymap.set("n", "<leader>tp", ":tabp<CR>")
 
 keymap.set("n", "<C-d>", "<C-d>zz", { remap = true })
 keymap.set("n", "<C-u>", "<C-u>zz", { remap = true })
+
+local autocmd = vim.api.nvim_create_autocmd
+
+-- do not auto-comment new lines
+autocmd("BufEnter", {
+    pattern = "",
+    command = "set fo-=c fo-=r fo-=o",
+})
