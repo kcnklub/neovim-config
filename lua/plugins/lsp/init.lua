@@ -120,7 +120,8 @@ return {
             use_diagnostic_signs = true,
         },
         keys = {
-            { "<leader>cd", "<cmd>Trouble diagnostics toggle<cr>", desc = "Document Diagnostics" },
+            { "<leader>cd", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Document Diagnostics" },
+            { "<leader>cD", "<cmd>Trouble diagnostics toggle<cr>", desc = "Document Diagnostics" },
         },
     },
 }
