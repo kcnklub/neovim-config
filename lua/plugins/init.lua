@@ -9,7 +9,6 @@ return {
             })
         end,
     },
-    { "nacro90/numb.nvim", event = "BufReadPre", config = true },
     {
         "aserowy/tmux.nvim",
         config = function()

@@ -64,6 +64,8 @@ return {
                 "typescript-language-server",
                 "rust-analyzer",
                 "codelldb",
+                "shfmt",
+                "gopls",
             },
         },
         config = function(_, opts)
@@ -113,18 +115,12 @@ return {
     },
     {
         "folke/trouble.nvim",
-        cmd = { "TroubleToggle", "Trouble" },
+        cmd = "Trouble",
         opts = {
             use_diagnostic_signs = true,
         },
         keys = {
-            { "<leader>cd", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Document Diagnostics" },
-            { "<leader>cD", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "workspace Diagnostics" },
+            { "<leader>cd", "<cmd>Trouble diagnostics toggle<cr>", desc = "Document Diagnostics" },
         },
-    },
-    {
-        "glepnir/lspsaga.nvim",
-        event = "VeryLazy",
-        config = true,
     },
 }
