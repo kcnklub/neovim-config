@@ -53,7 +53,6 @@ if vim.fn.has("nvim-0.9.0") == 1 then
 end
 
 vim.g.mapleader = " "
-vim.g.maplocalleader = ","
 local keymap = vim.keymap
 keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 
