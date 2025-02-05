@@ -9,7 +9,6 @@ return {
             which_key = { auto_register = true },
         },
     },
-
     {
         "folke/which-key.nvim",
         dependencies = {

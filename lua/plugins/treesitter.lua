@@ -15,7 +15,6 @@ local swap_next, swap_prev = (function()
 end)()
 
 return {
-    { "nvim-treesitter/playground" },
     {
         "nvim-treesitter/nvim-treesitter",
         dependencies = {

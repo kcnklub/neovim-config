@@ -8,7 +8,6 @@ return {
             },
             "nvim-telescope/telescope-file-browser.nvim",
             "nvim-telescope/telescope-project.nvim",
-            "ahmedkhalf/project.nvim",
             "cljoly/telescope-repo.nvim",
             "stevearc/aerial.nvim",
             "kkharji/sqlite.lua",
@@ -18,18 +17,8 @@ return {
         cmd = "Telescope",
         keys = {
             { "<leader><space>", require("utils").find_files, desc = "Find files" },
-            { "<leader>ff", require("utils").find_files, desc = "Find files" },
+            { "<leader>ff", require("utils").find_files, desc = "Find GIT files" },
             { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
-            { "<leader>fr", "<cmd>Telescope file_browser<cr>", desc = "Browser" },
-            { "<leader>ps", "<cmd>Telescope repo list<cr>", desc = "Search" },
-            { "<leader>hs", "<cmd>Telescope help_tags<cr>", desc = "Search" },
-            {
-                "<leader>pp",
-                function()
-                    require("telescope").extensions.project.project({ display_type = "minimal" })
-                end,
-                desc = "List",
-            },
             { "<leader>sw", "<cmd>Telescope live_grep<cr>", desc = "Workspace" },
             { "<leader>ss", "<cmd>Telescope luasnip<cr>", desc = "Snippets" },
             {
@@ -40,13 +29,6 @@ return {
                 desc = "Buffer",
             },
             { "<leader>vo", "<cmd>Telescope aerial<cr>", desc = "Code Outline" },
-            {
-                "<leader>zc",
-                function()
-                    require("telescope.builtin").colorscheme({ enable_preview = true })
-                end,
-                desc = "Colorscheme",
-            },
         },
         config = function(_, _)
             local telescope = require("telescope")
@@ -94,7 +76,6 @@ return {
             telescope.load_extension("fzf")
             telescope.load_extension("file_browser")
             telescope.load_extension("project")
-            telescope.load_extension("projects")
             telescope.load_extension("aerial")
             telescope.load_extension("luasnip")
         end,
@@ -102,15 +83,5 @@ return {
     {
         "stevearc/aerial.nvim",
         config = true,
-    },
-    {
-        "ahmedkhalf/project.nvim",
-        config = function()
-            require("project_nvim").setup({
-                detection_methods = { "pattern", "lsp" },
-                patterns = { ".git" },
-                ignore_lsp = { "null-ls" },
-            })
-        end,
     },
 }
