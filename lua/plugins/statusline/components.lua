@@ -1,9 +1,9 @@
-local icons = require "config.icons"
-local Job = require "plenary.job"
+local icons = require("config.icons")
+local Job = require("plenary.job")
 
 local function fg(name)
     return function()
-        local hl = vim.api.nvim_get_hl_by_name(name, true)
+        local hl = vim.api.nvim_get_hl(0, {})
         return hl and hl.foreground and { fg = string.format("#%06x", hl.foreground) }
     end
 end
@@ -19,14 +19,14 @@ return {
     git_repo = {
         function()
             local results = {}
-            local job = Job:new {
+            local job = Job:new({
                 command = "git",
                 args = { "rev-parse", "--show-toplevel" },
-                cwd = vim.fn.expand "%:p:h",
+                cwd = vim.fn.expand("%:p:h"),
                 on_stdout = function(_, line)
                     table.insert(results, line)
                 end,
-            }
+            })
             job:sync()
             if results[1] ~= nil then
                 return vim.fn.fnamemodify(results[1], ":t")
@@ -58,7 +58,7 @@ return {
     lsp_client = {
         function(msg)
             msg = msg or ""
-            local buf_clients = vim.lsp.get_active_clients { bufnr = 0 }
+            local buf_clients = vim.lsp.get_clients({ bufnr = 0 })
 
             if next(buf_clients) == nil then
                 if type(msg) == "boolean" or #msg == 0 then
@@ -78,7 +78,7 @@ return {
             end
 
             -- add formatter
-            local lsp_utils = require "plugins.lsp.utils"
+            local lsp_utils = require("plugins.lsp.utils")
             local formatters = lsp_utils.list_formatters(buf_ft)
             vim.list_extend(buf_client_names, formatters)
 
@@ -108,7 +108,7 @@ return {
         -- icon = icons.ui.Code,
         colored = true,
         on_click = function()
-            vim.cmd [[LspInfo]]
+            vim.cmd([[LspInfo]])
         end,
     },
     noice_mode = {
@@ -118,7 +118,7 @@ return {
         cond = function()
             return package.loaded["noice"] and require("noice").api.status.mode.has()
         end,
-        color = fg "Constant",
+        color = fg("Constant"),
     },
     noice_command = {
         function()
@@ -127,6 +127,6 @@ return {
         cond = function()
             return package.loaded["noice"] and require("noice").api.status.command.has()
         end,
-        color = fg "Statement",
+        color = fg("Statement"),
     },
 }
