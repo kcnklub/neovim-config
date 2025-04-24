@@ -66,18 +66,9 @@ return {
                 "codelldb",
                 "shfmt",
                 "gopls",
+                "pyright",
             },
         },
-        config = function(_, opts)
-            require("mason").setup()
-            local mason_registry = require("mason-registry")
-            for _, tool in ipairs(opts.ensure_installed) do
-                local p = mason_registry.get_package(tool)
-                if not p:is_installed() then
-                    p:install()
-                end
-            end
-        end,
     },
     {
         "nvimtools/none-ls.nvim",
