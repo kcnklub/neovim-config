@@ -9,15 +9,18 @@ return {
         },
         config = function()
             local cmp = require("cmp")
+            cmp
             cmp.setup({
                 completion = {
                     completeopt = "menu,menuone,noinsert",
                 },
                 mapping = {
-                    ["<CR>"] = cmp.mapping.confirm({
+                    ["<CR>"]   = cmp.mapping.confirm({
                         behavior = cmp.ConfirmBehavior.Insert,
                         select = true,
                     }),
+                    ['<Up>']   = cmp.mapping.select_prev_item(),
+                    ['<Down>'] = cmp.mapping.select_next_item(),
                 },
                 sources = cmp.config.sources({
                     { name = "nvim_lsp_signature_help" },
