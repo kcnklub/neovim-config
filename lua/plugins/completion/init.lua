@@ -14,6 +14,8 @@ return {
                     completeopt = "menu,menuone,noinsert",
                 },
                 mapping = {
+                    ["<Up>"] = cmp.mapping.select_prev_item(),
+                    ["<Down>"] = cmp.mapping.select_next_item(),
                     ["<CR>"] = cmp.mapping.confirm({
                         behavior = cmp.ConfirmBehavior.Insert,
                         select = true,

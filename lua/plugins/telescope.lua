@@ -60,6 +60,9 @@ return {
                         previewer = false,
                         find_command = { "rg", "--files", "--hidden", "-g", "!.git" },
                     },
+                    live_grep = {
+                        additional_args = function() return {"--hidden", "-g", "!.git"} end,
+                    },
                     git_files = {},
                     buffers = {},
                 },

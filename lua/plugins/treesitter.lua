@@ -33,7 +33,6 @@ return {
                 "lua",
                 "markdown",
                 "markdown_inline",
-                "org",
                 "query",
                 "regex",
                 "latex",

@@ -13,7 +13,10 @@ return {
 			relativenumber = true,
 		},
 		filters = {
-			custom = { ".git" },
+			custom = {},
+			dotfiles = false,
+			git_clean = false,
+			git_ignored = false,
 		},
 		sync_root_with_cwd = true,
 		update_focused_file = {

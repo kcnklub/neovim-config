@@ -83,3 +83,13 @@ autocmd("BufEnter", {
     pattern = "",
     command = "set fo-=c fo-=r fo-=o",
 })
+
+-- typescript/javascript specific indentation
+autocmd("FileType", {
+    pattern = { "typescript", "typescriptreact", "javascript", "javascriptreact", "json" },
+    callback = function()
+        vim.opt_local.shiftwidth = 2
+        vim.opt_local.tabstop = 2
+        vim.opt_local.softtabstop = 2
+    end,
+})
