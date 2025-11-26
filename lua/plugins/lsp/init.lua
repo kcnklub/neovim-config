@@ -82,6 +82,14 @@ return {
                 sources = {
                     nls.builtins.formatting.stylua,
                     nls.builtins.formatting.shfmt,
+                    nls.builtins.formatting.clang_format.with({
+                        extra_args = { "--style={IndentWidth: 4}" },
+                        filetypes = { "c", "cpp", "objc", "objcpp", "proto" },
+                    }),
+                    nls.builtins.formatting.prettier.with({
+                        extra_args = { "--tab-width", "2" },
+                        filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "json", "jsonc" },
+                    }),
                 },
             })
         end,
