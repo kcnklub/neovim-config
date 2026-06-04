@@ -16,9 +16,13 @@ end)()
 
 return {
     {
+        "nvim-treesitter/nvim-treesitter-textobjects",
+        dependencies = { "nvim-treesitter/nvim-treesitter" },
+    },
+    {
         "nvim-treesitter/nvim-treesitter",
+        branch = "master",
         dependencies = {
-            "nvim-treesitter/nvim-treesitter-textobjects",
             "RRethy/nvim-treesitter-endwise",
             "windwp/nvim-ts-autotag",
         },
@@ -33,6 +37,7 @@ return {
                 "lua",
                 "markdown",
                 "yaml",
+                "java",
                 "javascript",
                 "typescript",
             },

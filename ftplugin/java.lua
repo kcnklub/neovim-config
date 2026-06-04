@@ -17,17 +17,21 @@ if vim.fn.executable(jdtls_bin) ~= 1 then
     jdtls_bin = "jdtls"
 end
 
+local lombok_jar = vim.fn.stdpath("data") .. "/mason/packages/jdtls/lombok.jar"
+
 local workspace_name = root_dir:gsub("[/\\:]", "_")
 local workspace_dir = vim.fn.stdpath("cache") .. "/jdtls/workspace/" .. workspace_name
 vim.fn.mkdir(workspace_dir, "p")
 
+local cmd = { jdtls_bin }
+if vim.fn.filereadable(lombok_jar) == 1 then
+    table.insert(cmd, "--jvm-arg=-javaagent:" .. lombok_jar)
+end
+vim.list_extend(cmd, { "-data", workspace_dir })
+
 local config = {
     name = "jdtls",
-    cmd = {
-        jdtls_bin,
-        "-data",
-        workspace_dir,
-    },
+    cmd = cmd,
     root_dir = root_dir,
     capabilities = require("plugins.lsp.utils").capabilities(),
     settings = {
