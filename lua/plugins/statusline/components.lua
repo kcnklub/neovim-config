@@ -1,11 +1,52 @@
 local icons = require("config.icons")
-local Job = require("plenary.job")
 
 local function fg(name)
     return function()
         local hl = vim.api.nvim_get_hl(0, {})
         return hl and hl.foreground and { fg = string.format("#%06x", hl.foreground) }
     end
+end
+
+local git_root_cache = {}
+
+local function current_file_path()
+    if vim.bo.buftype ~= "" then
+        return nil
+    end
+
+    local name = vim.api.nvim_buf_get_name(0)
+    if name == "" or name:match("^[%w+.-]+://") then
+        return nil
+    end
+
+    return vim.fs.normalize(name)
+end
+
+local function current_git_root()
+    local path = current_file_path()
+    if not path then
+        return nil
+    end
+
+    local dir = vim.fn.isdirectory(path) == 1 and path or vim.fn.fnamemodify(path, ":p:h")
+    if dir == "" or vim.fn.isdirectory(dir) ~= 1 then
+        return nil
+    end
+
+    local cached = git_root_cache[dir]
+    if cached ~= nil then
+        return cached or nil
+    end
+
+    local git_dir = vim.fs.find(".git", { path = dir, upward = true })[1]
+    if not git_dir then
+        git_root_cache[dir] = false
+        return nil
+    end
+
+    local root = vim.fs.dirname(git_dir)
+    git_root_cache[dir] = root
+    return root
 end
 
 return {
@@ -18,22 +59,10 @@ return {
     },
     git_repo = {
         function()
-            local results = {}
-            local job = Job:new({
-                command = "git",
-                args = { "rev-parse", "--show-toplevel" },
-                cwd = vim.fn.expand("%:p:h"),
-                on_stdout = function(_, line)
-                    table.insert(results, line)
-                end,
-            })
-            job:sync()
-            if results[1] ~= nil then
-                return vim.fn.fnamemodify(results[1], ":t")
-            else
-                return ""
-            end
+            local root = current_git_root()
+            return root and vim.fn.fnamemodify(root, ":t") or ""
         end,
+        cond = current_git_root,
     },
     separator = {
         function()
@@ -43,6 +72,7 @@ return {
     diff = {
         "diff",
         colored = false,
+        cond = current_git_root,
     },
     diagnostics = {
         "diagnostics",
