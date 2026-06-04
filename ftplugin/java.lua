@@ -67,9 +67,11 @@ local config = {
             },
         },
     },
-    init_options = {
-        extendedClientCapabilities = require("jdtls.capabilities"),
-    },
+    init_options = (function()
+        local extendedClientCapabilities = require("jdtls.capabilities")
+        extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
+        return { extendedClientCapabilities = extendedClientCapabilities }
+    end)(),
 }
 
 require("jdtls").start_or_attach(config)

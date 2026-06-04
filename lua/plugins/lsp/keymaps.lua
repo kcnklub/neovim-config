@@ -16,7 +16,7 @@ function M.on_attach(client, buffer)
     self:map("[e", M.diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
     self:map("]w", M.diagnostic_goto(true, "WARNING"), { desc = "Next Warning" })
     self:map("[w", M.diagnostic_goto(false, "WARNING"), { desc = "Prev Warning" })
-    self:map("<leader>a", "Lspsaga code_action", { desc = "Code Action", mode = { "n", "v" }, has = "codeAction" })
+    self:map("<leader>a", vim.lsp.buf.code_action, { desc = "Code Action", mode = { "n", "v" } })
 
     local format = require("plugins.lsp.format").format
     self:map("<leader>cf", format, { desc = "Format Document", has = "documentFormatting" })
@@ -32,6 +32,15 @@ function M.new(client, buffer)
 end
 
 function M:has(cap)
+    local methods = {
+        signatureHelp    = "textDocument/signatureHelp",
+        documentFormatting = "textDocument/formatting",
+        rename           = "textDocument/rename",
+    }
+    local method = methods[cap]
+    if method then
+        return self.client:supports_method(method)
+    end
     return self.client.server_capabilities[cap .. "Provider"]
 end
 
