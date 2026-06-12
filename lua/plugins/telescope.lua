@@ -14,7 +14,7 @@ return {
             "aaronhallaert/advanced-git-search.nvim",
             "benfowler/telescope-luasnip.nvim",
         },
-        cmd = "Telescope",
+        cmd = { "Telescope", "CherryPick" },
         keys = {
             { "<leader><space>", require("utils").find_files, desc = "Find files" },
             { "<leader>ff", require("utils").find_files, desc = "Find GIT files" },
@@ -29,6 +29,13 @@ return {
                 desc = "Buffer",
             },
             { "<leader>vo", "<cmd>Telescope aerial<cr>", desc = "Code Outline" },
+            {
+                "<leader>gcp",
+                function()
+                    require("utils.git").cherry_pick_picker()
+                end,
+                desc = "Cherry Pick from develop",
+            },
         },
         config = function(_, _)
             local telescope = require("telescope")
@@ -78,6 +85,9 @@ return {
             telescope.load_extension("project")
             telescope.load_extension("aerial")
             telescope.load_extension("luasnip")
+            vim.api.nvim_create_user_command("CherryPick", function()
+                require("utils.git").cherry_pick_picker()
+            end, { desc = "Cherry pick commits from develop branch" })
         end,
     },
     {

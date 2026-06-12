@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<profiles version="23">
+  <profile kind="CodeFormatterProfile" name="nvim-jdtls" version="23">
+    <setting id="org.eclipse.jdt.core.formatter.lineSplit" value="999"/>
+    <setting id="org.eclipse.jdt.core.formatter.comment.line_length" value="999"/>
+    <setting id="org.eclipse.jdt.core.formatter.alignment_for_parameters_in_method_declaration" value="18"/>
+    <setting id="org.eclipse.jdt.core.formatter.join_wrapped_lines" value="false"/>
+  </profile>
+</profiles>

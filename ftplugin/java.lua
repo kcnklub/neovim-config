@@ -36,6 +36,15 @@ local config = {
     capabilities = require("plugins.lsp.utils").capabilities(),
     settings = {
         java = {
+            format = {
+                comments = {
+                    enabled = false,
+                },
+                settings = {
+                    url = vim.fn.stdpath("config") .. "/lang/eclipse-java-formatter.xml",
+                    profile = "nvim-jdtls",
+                },
+            },
             configuration = {
                 updateBuildConfiguration = "automatic",
             },
