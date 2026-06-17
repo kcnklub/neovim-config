@@ -27,6 +27,9 @@ local cmd = { jdtls_bin }
 if vim.fn.filereadable(lombok_jar) == 1 then
     table.insert(cmd, "--jvm-arg=-javaagent:" .. lombok_jar)
 end
+-- Give the JDTLS JVM a larger heap to avoid GC thrashing / CPU spikes.
+table.insert(cmd, "--jvm-arg=-Xms1g")
+table.insert(cmd, "--jvm-arg=-Xmx4g")
 vim.list_extend(cmd, { "-data", workspace_dir })
 
 local config = {
@@ -45,8 +48,11 @@ local config = {
                     profile = "nvim-jdtls",
                 },
             },
+            -- "interactive" avoids the automatic Gradle re-sync loop that can
+            -- leak Timer threads on large composite builds. Run :lua require("jdtls").update_projects_config()
+            -- (or accept the prompt) after changing build files.
             configuration = {
-                updateBuildConfiguration = "automatic",
+                updateBuildConfiguration = "interactive",
             },
             import = {
                 gradle = {
