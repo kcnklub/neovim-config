@@ -30,6 +30,20 @@ return {
 
             wk.add({
                 { "<leader>w", "<cmd>w<cr>", desc = "Save" },
+                {
+                    "<leader>jc",
+                    function()
+                        require("utils.java").new_class()
+                    end,
+                    desc = "New Java Class",
+                },
+                {
+                    "<leader>jt",
+                    function()
+                        require("utils.java").new_test()
+                    end,
+                    desc = "New Java Test",
+                },
             })
         end,
     },

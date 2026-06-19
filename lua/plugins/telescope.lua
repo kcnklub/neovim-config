@@ -8,6 +8,7 @@ return {
             },
             "nvim-telescope/telescope-file-browser.nvim",
             "nvim-telescope/telescope-project.nvim",
+            "nvim-telescope/telescope-ui-select.nvim",
             "cljoly/telescope-repo.nvim",
             "stevearc/aerial.nvim",
             "kkharji/sqlite.lua",
@@ -76,6 +77,9 @@ return {
                         mappings = mappings,
                     },
                     project = {},
+                    ["ui-select"] = {
+                        require("telescope.themes").get_dropdown({}),
+                    },
                 },
             }
 
@@ -85,6 +89,7 @@ return {
             telescope.load_extension("project")
             telescope.load_extension("aerial")
             telescope.load_extension("luasnip")
+            telescope.load_extension("ui-select")
             vim.api.nvim_create_user_command("CherryPick", function()
                 require("utils.git").cherry_pick_picker()
             end, { desc = "Cherry pick commits from develop branch" })

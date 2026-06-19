@@ -37,6 +37,14 @@ local config = {
     cmd = cmd,
     root_dir = root_dir,
     capabilities = require("plugins.lsp.utils").capabilities(),
+    -- The server asks the client which debug/test bundles to (re)load via
+    -- this command. We register no bundles, so answer with an empty list to
+    -- avoid the "_java.reloadBundles.command not supported on client" error.
+    commands = {
+        ["_java.reloadBundles.command"] = function()
+            return {}
+        end,
+    },
     settings = {
         java = {
             format = {
@@ -55,6 +63,17 @@ local config = {
                 updateBuildConfiguration = "interactive",
             },
             import = {
+                -- Setting exclusions replaces jdtls' defaults, so the first
+                -- four entries restore them. The last entry stops jdtls from
+                -- importing eclipse.jdt.ls' own old Gradle test fixtures (e.g.
+                -- gradle-4.0), which can't run on modern JDKs.
+                exclusions = {
+                    "**/node_modules/**",
+                    "**/.metadata/**",
+                    "**/archetype-resources/**",
+                    "**/META-INF/maven/**",
+                    "**/org.eclipse.jdt.ls.tests/projects/gradle/**",
+                },
                 gradle = {
                     enabled = true,
                     wrapper = {
