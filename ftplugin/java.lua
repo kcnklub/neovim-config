@@ -109,3 +109,7 @@ local config = {
 }
 
 require("jdtls").start_or_attach(config)
+
+vim.keymap.set("n", "<leader>ci", function()
+    require("jdtls").update_projects_config()
+end, { buffer = 0, desc = "Import/Sync Build Config" })
