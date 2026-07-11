@@ -23,10 +23,7 @@ function M.find_files()
 
 	local telescope = require("telescope.builtin")
 
-	local ok = pcall(telescope.git_files, opts)
-	if not ok then
-		telescope.find_files(opts)
-	end
+	telescope.find_files(opts)
 end
 
 function M.has(plugin)

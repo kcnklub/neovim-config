@@ -18,7 +18,7 @@ return {
         cmd = { "Telescope", "CherryPick" },
         keys = {
             { "<leader><space>", require("utils").find_files, desc = "Find files" },
-            { "<leader>ff", require("utils").find_files, desc = "Find GIT files" },
+            { "<leader>ff", require("utils").find_files, desc = "Find files" },
             { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
             { "<leader>sw", "<cmd>Telescope live_grep<cr>", desc = "Workspace" },
             { "<leader>ss", "<cmd>Telescope luasnip<cr>", desc = "Snippets" },
