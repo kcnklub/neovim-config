@@ -1,35 +1,70 @@
-local swap_next, swap_prev = (function()
-    local swap_objects = {
-        p = "@parameter.inner",
-        f = "@function.outer",
-        c = "@class.outer",
-    }
-
-    local n, p = {}, {}
-    for key, obj in pairs(swap_objects) do
-        n[string.format("<leader>cx%s", key)] = obj
-        p[string.format("<leader>cX%s", key)] = obj
-    end
-
-    return n, p
-end)()
+local swap_objects = {
+    p = "@parameter.inner",
+    f = "@function.outer",
+    c = "@class.outer",
+}
 
 return {
     {
         "nvim-treesitter/nvim-treesitter-textobjects",
-        dependencies = { "nvim-treesitter/nvim-treesitter" },
+        branch = "main",
+        lazy = false,
+        config = function()
+            require("nvim-treesitter-textobjects").setup({
+                select = { lookahead = true },
+                move = { set_jumps = true },
+            })
+
+            local select = require("nvim-treesitter-textobjects.select")
+            for key, obj in pairs({
+                ["aa"] = "@parameter.outer",
+                ["ia"] = "@parameter.inner",
+                ["af"] = "@function.outer",
+                ["if"] = "@function.inner",
+                ["ac"] = "@class.outer",
+                ["ic"] = "@class.inner",
+            }) do
+                vim.keymap.set({ "x", "o" }, key, function()
+                    select.select_textobject(obj, "textobjects")
+                end, { desc = "Select " .. obj })
+            end
+
+            local move = require("nvim-treesitter-textobjects.move")
+            for fn, maps in pairs({
+                goto_next_start = { ["]m"] = "@function.outer", ["]]"] = "@class.outer" },
+                goto_next_end = { ["]M"] = "@function.outer", ["]["] = "@class.outer" },
+                goto_previous_start = { ["[m"] = "@function.outer", ["[["] = "@class.outer" },
+                goto_previous_end = { ["[M"] = "@function.outer", ["[]"] = "@class.outer" },
+            }) do
+                for key, obj in pairs(maps) do
+                    vim.keymap.set({ "n", "x", "o" }, key, function()
+                        move[fn](obj, "textobjects")
+                    end, { desc = fn .. " " .. obj })
+                end
+            end
+
+            local swap = require("nvim-treesitter-textobjects.swap")
+            for key, obj in pairs(swap_objects) do
+                vim.keymap.set("n", "<leader>cx" .. key, function()
+                    swap.swap_next(obj)
+                end, { desc = "Swap next " .. obj })
+                vim.keymap.set("n", "<leader>cX" .. key, function()
+                    swap.swap_previous(obj)
+                end, { desc = "Swap previous " .. obj })
+            end
+        end,
     },
     {
         "nvim-treesitter/nvim-treesitter",
-        branch = "master",
+        branch = "main",
+        -- main does not support lazy-loading
+        lazy = false,
         dependencies = {
             "RRethy/nvim-treesitter-endwise",
             "windwp/nvim-ts-autotag",
         },
         build = ":TSUpdate",
-        event = { "BufReadPost", "BufNewFile" },
         opts = {
-            sync_install = false,
             ensure_installed = {
                 "bash",
                 "dockerfile",
@@ -41,86 +76,32 @@ return {
                 "javascript",
                 "typescript",
             },
-            highlight = { enable = true, additional_vim_regex_highlighting = { "org", "markdown" } },
-            indent = { enable = true, disable = { "python" } },
-            incremental_selection = {
-                enable = true,
-                keymaps = {
-                    init_selection = "gnn",
-                    node_incremental = "grn",
-                    scope_incremental = "grc",
-                    node_decremental = "grm",
-                },
-            },
-            textobjects = {
-                select = {
-                    enable = true,
-                    lookahead = true,
-                    keymaps = {
-                        ["aa"] = "@parameter.outer",
-                        ["ia"] = "@parameter.inner",
-                        ["af"] = "@function.outer",
-                        ["if"] = "@function.inner",
-                        ["ac"] = "@class.outer",
-                        ["ic"] = "@class.inner",
-                    },
-                },
-                move = {
-                    enable = true,
-                    set_jumps = true,
-                    goto_next_start = {
-                        ["]m"] = "@function.outer",
-                        ["]]"] = "@class.outer",
-                    },
-                    goto_next_end = {
-                        ["]M"] = "@function.outer",
-                        ["]["] = "@class.outer",
-                    },
-                    goto_previous_start = {
-                        ["[m"] = "@function.outer",
-                        ["[["] = "@class.outer",
-                    },
-                    goto_previous_end = {
-                        ["[M"] = "@function.outer",
-                        ["[]"] = "@class.outer",
-                    },
-                },
-                swap = {
-                    enable = true,
-                    swap_next = swap_next,
-                    swap_previous = swap_prev,
-                },
-            },
-            matchup = {
-                enable = true,
-            },
-            endwise = {
-                enable = true,
-            },
-            autotag = {
-                enable = true,
-            },
-            playground = {
-                enable = true,
-                disable = {},
-                updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
-                persist_queries = false, -- Whether the query persists across vim sessions
-                keybindings = {
-                    toggle_query_editor = "o",
-                    toggle_hl_groups = "i",
-                    toggle_injected_languages = "t",
-                    toggle_anonymous_nodes = "a",
-                    toggle_language_display = "I",
-                    focus_language = "f",
-                    unfocus_language = "F",
-                    update = "R",
-                    goto_node = "<cr>",
-                    show_help = "?",
-                },
-            },
+            -- keep vim regex syntax on alongside treesitter for these filetypes
+            additional_vim_regex_highlighting = { "org", "markdown" },
+            indent_disable = { "python" },
         },
         config = function(_, opts)
-            require("nvim-treesitter.configs").setup(opts)
+            local ts = require("nvim-treesitter")
+            ts.setup()
+            ts.install(opts.ensure_installed)
+
+            vim.api.nvim_create_autocmd("FileType", {
+                group = vim.api.nvim_create_augroup("user_treesitter", { clear = true }),
+                callback = function(args)
+                    if not pcall(vim.treesitter.start, args.buf) then
+                        return
+                    end
+                    local ft = vim.bo[args.buf].filetype
+                    if vim.tbl_contains(opts.additional_vim_regex_highlighting, ft) then
+                        vim.bo[args.buf].syntax = "on"
+                    end
+                    if not vim.tbl_contains(opts.indent_disable, ft) then
+                        vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+                    end
+                end,
+            })
+
+            require("nvim-ts-autotag").setup()
         end,
     },
     {
