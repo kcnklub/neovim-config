@@ -1,9 +1,9 @@
 local omarchy = require("utils.omarchy")
 
--- gruvbox is always installed as the fallback (macOS, or if the Omarchy
+-- everforest is always installed as the fallback (macOS, or if the Omarchy
 -- theme's plugin ever fails to resolve).
 local spec = {
-    { "ellisonleao/gruvbox.nvim", priority = 1000, config = true, opts = {} },
+    { "neanias/everforest-nvim", priority = 1000 },
 }
 
 if omarchy.is_active() then

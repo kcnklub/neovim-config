@@ -1,5 +1,5 @@
 -- Follow the active Omarchy theme's colorscheme when on Omarchy; otherwise
--- (e.g. macOS) fall back to gruvbox. See lua/utils/omarchy.lua.
+-- (e.g. macOS) fall back to everforest dark. See lua/utils/omarchy.lua.
 local omarchy = require("utils.omarchy")
 
 local function apply_omarchy()
@@ -14,9 +14,9 @@ local function apply_omarchy()
 end
 
 if not apply_omarchy() then
-    require("gruvbox").setup({
-        transparent_mode = true,
+    require("everforest").setup({
+        background = "medium",
     })
     vim.o.background = "dark"
-    vim.cmd("colorscheme gruvbox")
+    vim.cmd("colorscheme everforest")
 end
