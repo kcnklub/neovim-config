@@ -3,7 +3,7 @@ return {
         "williamboman/mason.nvim",
         opts = function(_, opts)
             opts.ensure_installed = opts.ensure_installed or {}
-            vim.list_extend(opts.ensure_installed, { "jdtls" })
+            vim.list_extend(opts.ensure_installed, { "jdtls", "java-debug-adapter", "java-test" })
         end,
     },
     {
@@ -17,5 +17,8 @@ return {
     {
         "mfussenegger/nvim-jdtls",
         ft = "java",
+        -- nvim-jdtls registers the java adapter with nvim-dap on attach,
+        -- so nvim-dap must be loadable when jdtls starts.
+        dependencies = { "mfussenegger/nvim-dap" },
     },
 }
