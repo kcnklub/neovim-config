@@ -117,6 +117,11 @@ local config = {
             contentProvider = {
                 preferred = "fernflower",
             },
+            inlayHints = {
+                parameterNames = {
+                    enabled = "all",
+                },
+            },
         },
     },
     init_options = (function()

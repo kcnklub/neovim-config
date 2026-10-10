@@ -1,5 +1,10 @@
 local M = {}
 
+M.inlay_hint_servers = {
+	rust_analyzer = true,
+	jdtls = true,
+}
+
 local FORMATTING = require("null-ls").methods.FORMATTING
 local DIAGNOSTICS = require("null-ls").methods.DIAGNOSTICS
 local COMPLETION = require("null-ls").methods.COMPLETION

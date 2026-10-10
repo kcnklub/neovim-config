@@ -54,6 +54,10 @@ function M.setup(_, opts)
     lsp_utils.on_attach(function(client, buffer)
         require("plugins.lsp.format").on_attach(client, buffer)
         require("plugins.lsp.keymaps").on_attach(client, buffer)
+
+        if lsp_utils.inlay_hint_servers[client.name] and client:supports_method("textDocument/inlayHint") then
+            vim.lsp.inlay_hint.enable(true, { bufnr = buffer })
+        end
     end)
 
     lsp_init()
