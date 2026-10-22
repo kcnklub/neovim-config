@@ -82,6 +82,9 @@ return {
                     buffers = {},
                 },
                 extensions = {
+                    fzf = {
+                        case_mode = "ignore_case",
+                    },
                     file_browser = {
                         hijack_netrw = true,
                         mappings = mappings,

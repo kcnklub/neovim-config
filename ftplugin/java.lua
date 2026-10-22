@@ -102,6 +102,21 @@ local config = {
                     },
                 },
             },
+            -- Note the plural "imports": jdtls reads wrapper checksums from
+            -- java.imports.gradle.wrapper.checksums, unlike java.import.gradle.wrapper.enabled.
+            -- Wrapper jars newer than jdtls' built-in list trigger a "could be malicious"
+            -- warning. Only add a hash after checking it against
+            -- https://services.gradle.org/distributions/gradle-<ver>-wrapper.jar.sha256
+            imports = {
+                gradle = {
+                    wrapper = {
+                        checksums = {
+                            -- gradle-9.8.1
+                            { sha256 = "3b8a25775a69158b5ad2b1d17a80a88dc7b40a352a73eb27d06c612a7ce68e98", allowed = true },
+                        },
+                    },
+                },
+            },
             project = {
                 importOnFirstTimeStartup = "automatic",
             },
@@ -133,6 +148,11 @@ local config = {
         }
     end)(),
 }
+
+-- jdtls imports the project during initialize, before nvim-jdtls pushes
+-- `settings` via didChangeConfiguration. Settings that affect the initial import
+-- (e.g. gradle wrapper checksums) must also be sent through init_options.
+config.init_options.settings = config.settings
 
 require("jdtls").start_or_attach(config)
 

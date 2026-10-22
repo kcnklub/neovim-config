@@ -16,7 +16,12 @@ end
 if not apply_omarchy() then
     require("everforest").setup({
         background = "medium",
+        transparent_background_level = 1,
     })
     vim.o.background = "dark"
+    -- 0.9 opacity: floats/popups blend 10%; Neovide gets a real window alpha.
+    vim.o.winblend = 10
+    vim.o.pumblend = 10
+    vim.g.neovide_opacity = 0.9
     vim.cmd("colorscheme everforest")
 end

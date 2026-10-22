@@ -71,6 +71,7 @@ return {
                 "html",
                 "lua",
                 "markdown",
+                "markdown_inline",
                 "yaml",
                 "java",
                 "javascript",
