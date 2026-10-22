@@ -3,13 +3,32 @@ onboarding = false
 # tmux session -> herdr workspace, tmux window -> herdr tab, tmux pane -> herdr pane
 
 [theme]
-# tmux ran on the terminal's own palette (bg=default, fg=default, ANSI blue accents)
-name = "terminal"
+# Fixed Everforest Dark (medium) palette now, not the terminal's own ANSI colors -
+# every token below is overridden so the base name just has to be a valid fallback
+name = "gruvbox"
 
 [theme.custom]
-# The active tab is drawn as panel_bg text on an accent background, so panel_bg
-# has to be dark for it to read - same colors as status-left's "#[fg=black,bg=blue]"
-panel_bg = "black"
+# Everforest by sainnhe (https://github.com/sainnhe/everforest), mapped to herdr's
+# tokens via thohemp/herdr-everforest (https://github.com/thohemp/herdr-everforest)
+accent        = "#a7c080"
+panel_bg      = "#2d353b"
+sidebar_bg    = "#232a2e"
+active_row_bg = "#3d484d"
+selection_bg  = "#475258"
+surface0      = "#343f44"
+surface1      = "#3d484d"
+surface_dim   = "#232a2e"
+overlay0      = "#7a8478"
+overlay1      = "#859289"
+text          = "#d3c6aa"
+subtext0      = "#9da9a0"
+mauve         = "#d699b6"
+green         = "#a7c080"
+yellow        = "#dbbc7f"
+red           = "#e67e80"
+blue          = "#7fbbb3"
+teal          = "#83c092"
+peach         = "#e69875"
 
 [terminal]
 # Matches -c "#{pane_current_path}" on every split, window, and session
@@ -91,7 +110,6 @@ type = "shell"
 command = "herdr plugin pane open --plugin project-picker --entrypoint pick"
 
 [ui]
-accent = "blue"
 
 # tmux drew single-line dividers between adjacent panes and no outer frame
 pane_gaps = false
