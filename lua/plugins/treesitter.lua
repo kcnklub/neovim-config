@@ -76,6 +76,7 @@ return {
                 "java",
                 "javascript",
                 "typescript",
+                "gleam",
             },
             -- keep vim regex syntax on alongside treesitter for these filetypes
             additional_vim_regex_highlighting = { "org", "markdown" },
