@@ -1,19 +1,15 @@
 local M = {}
 
 --- Resolve the target directory for a new file.
---- When nvim-tree is the focused window, use the node under the cursor.
+--- When an oil buffer is focused, use the directory it is showing.
 --- Otherwise use the current buffer's directory (or cwd as fallback).
 local function resolve_dir()
-    if vim.bo.filetype == "NvimTree" then
-        local ok, api = pcall(require, "nvim-tree.api")
+    if vim.bo.filetype == "oil" then
+        local ok, oil = pcall(require, "oil")
         if ok then
-            local node = api.tree.get_node_under_cursor()
-            if node then
-                if node.type == "directory" then
-                    return node.absolute_path
-                else
-                    return vim.fs.dirname(node.absolute_path)
-                end
+            local dir = oil.get_current_dir()
+            if dir then
+                return (dir:gsub("/$", ""))
             end
         end
     end

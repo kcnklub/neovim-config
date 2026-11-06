@@ -86,7 +86,7 @@ return {
                         case_mode = "ignore_case",
                     },
                     file_browser = {
-                        hijack_netrw = true,
+                        hijack_netrw = false,
                         mappings = mappings,
                     },
                     project = {},
