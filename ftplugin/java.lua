@@ -136,6 +136,12 @@ local config = {
                 parameterNames = {
                     enabled = "all",
                 },
+                variableTypes = {
+                    enabled = true,
+                },
+                parameterTypes = {
+                    enabled = true,
+                },
             },
         },
     },
